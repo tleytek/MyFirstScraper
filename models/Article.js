@@ -25,3 +25,5 @@ var ArticleSchema = new Schema({
 		ref: "UserComment"
 	}
 });
+
+module.exports = Article;
