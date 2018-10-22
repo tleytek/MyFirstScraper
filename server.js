@@ -81,7 +81,7 @@ app.get("/scrape", function(req, res) {
 			db.Article.create(result)
 				.then(function(dbArticle) {
 					// View the added result in the console
-					console.log(dbArticle);
+					//console.log(dbArticle);
 				})
 				.catch(function(err) {
 					// If an error occurred, send it to the client
@@ -93,4 +93,6 @@ app.get("/scrape", function(req, res) {
 });
 
 //listen on port 3000
-app.listen(3000, function() {});
+app.listen(3000, function() {
+	console.log("App running on port " + PORT + "!");
+});
