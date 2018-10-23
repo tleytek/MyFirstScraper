@@ -29,15 +29,13 @@ mongoose.connect(
 // Retrieve data from the db
 app.get("/", function(req, res) {
 	// Find all the results from the scrapedData collection in the db
-	db.scrapedData.find({}, function(error, data) {
-		// Throw any errors to the console
-		if (error) {
-			console.log(error);
-			// If there are no errors then send the data to the browser as json
-		} else {
-			res.json(result);
-		}
-	});
+	db.Article.find({})
+		.then(function(dbArticle) {
+			res.json(dbArticle);
+		})
+		.catch(function(err) {
+			res.json(err);
+		});
 });
 
 //Scrapping data from a site
