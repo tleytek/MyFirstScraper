@@ -22,6 +22,7 @@ $.getJSON("/articles", function(data) {
                         data-id='${data[i]._id}'
                         data-toggle="modal" 
                         data-target=".bd-example-modal-lg"
+                        id="commentButton"
                     >Comment</button>
                 </div>
             </div>`
@@ -29,36 +30,46 @@ $.getJSON("/articles", function(data) {
 	}
 });
 
-$(document).on("click", "button", function() {
-	$("#userComment").empty();
-
+$(document).on("click", "#commentButton", function() {
 	var thisId = $(this).attr("data-id");
 	// Now make an ajax call for the Article
 	$.ajax({
 		method: "GET",
 		url: "/articles/" + thisId
 	}).then(function(data) {
-		$("#userComment").append(`<h2> ${data.title}</h2>`);
-		$("#userComment").append("<input id='titleinput' name='title' >");
-		$("#userComment").append(
-			"<textarea id='bodyinput' name='body'></textarea>"
-		);
-		$("#userComment").append(
-			`<button data-id='${data._id}' id='savecomment'>Save Comment</button>`
-		);
+		$(".modal-title").text(data.title);
 
+		$("#title").append(
+			"<label for='comment-title' class='col-form-label'>Comment Title</label>"
+		);
+		$("#title").append(
+			"<input type='text' class='form-control' id='comment-title'>"
+		);
+		$("#comment").append(
+			"<label for='comment-text' class='col-form-label'>Comment</label>"
+		);
+		$("#comment").append(
+			"<textarea class='form-control' id='comment-text'></textarea>"
+		);
+		$("#saveComment").attr("data-id", data._id);
+		console.log(data);
 		// If there's a comment in the article
-		if (data.comment) {
+		if (data.userComment) {
+			console.log(data);
 			// Place the title of the comment in the title input
-			$("#titleinput").val(data.comment.title);
+			$("#comment-title").val(data.userComment.title);
 			// Place the body of the comment in the body textarea
-			$("#bodyinput").val(data.comment.body);
+			$("#comment-text").val(data.userComment.body);
+		} else {
+			$(".modal-title").empty();
+			$("#title").empty();
+			$("#comment").empty();
 		}
 	});
 });
 
 // When you click the save comment button
-$(document).on("click", "#savecomment", function() {
+$(document).on("click", "#saveComment", function() {
 	// Grab the id associated with the article from the submit button
 	var thisId = $(this).attr("data-id");
 
@@ -68,20 +79,22 @@ $(document).on("click", "#savecomment", function() {
 		url: "/articles/" + thisId,
 		data: {
 			// Value taken from title input
-			title: $("#titleinput").val(),
+			title: $("#comment-title").val(),
 			// Value taken from comment textarea
-			body: $("#bodyinput").val()
+			body: $("#comment-text").val()
 		}
 	})
 		// With that done
 		.then(function(data) {
 			// Log the response
-			console.log(data);
+			// console.log(data);
 			// Empty the comments section
-			$("#userComment").empty();
+			$(".modal-title").empty();
+			$("#title").empty();
+			$("#comment").empty();
 		});
 
 	// Also, remove the values entered in the input and textarea for  entry
-	$("#titleinput").val("");
-	$("#bodyinput").val("");
+	$("#title").val("");
+	$("#comment").val("");
 });
