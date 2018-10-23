@@ -31,10 +31,6 @@ $.getJSON("/articles", function(data) {
 });
 
 $(document).on("click", "#commentButton", function() {
-	$(".modal-title").empty();
-	$("#title").empty();
-	$("#comment").empty();
-
 	var thisId = $(this).attr("data-id");
 	// Now make an ajax call for the Article
 	$.ajax({
@@ -56,14 +52,19 @@ $(document).on("click", "#commentButton", function() {
 			"<textarea class='form-control' id='comment-text'></textarea>"
 		);
 		$("#saveComment").attr("data-id", data._id);
-
+		console.log(data);
 		// If there's a comment in the article
-		// if (data.userComment) {
-		// 	// Place the title of the comment in the title input
-		// 	$("#comment-title").val(data.userComment.title);
-		// 	// Place the body of the comment in the body textarea
-		// 	$("#comment-text").val(data.userComment.body);
-		// }
+		if (data.userComment) {
+			console.log(data);
+			// Place the title of the comment in the title input
+			$("#comment-title").val(data.userComment.title);
+			// Place the body of the comment in the body textarea
+			$("#comment-text").val(data.userComment.body);
+		} else {
+			$(".modal-title").empty();
+			$("#title").empty();
+			$("#comment").empty();
+		}
 	});
 });
 
