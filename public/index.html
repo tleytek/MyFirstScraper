@@ -33,16 +33,24 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div id="commentSection">
+                        <h4 id="current-title"></h4>
+                        <p id="current-comment"></p>
+                    </div>
                     <form>
                         <div class="form-group" id="title">
+                            <label for='comment-title' class='col-form-label'>Comment Title</label>
+                            <input type='text' class='form-control' id='comment-title'>
                         </div>
                         <div class="form-group" id="comment">
+                            <label for='comment-text' class='col-form-label'>Comment</label>
+                            <textarea class='form-control' id='comment-text'></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveComment" data-dismiss="modal">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="saveComment">Save changes</button>
                 </div>
             </div>
         </div>
