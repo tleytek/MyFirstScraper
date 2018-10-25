@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var CommentSchema = new Schema(
+var UserCommentSchema = new Schema(
 	{
 		title: String,
 		text: String
@@ -10,6 +10,6 @@ var CommentSchema = new Schema(
 	}
 );
 
-var Comment = mongoose.model("Comment", CommentSchema);
+var UserComment = mongoose.model("UserComment", UserCommentSchema);
 
-module.exports = Comment;
+module.exports = UserComment;

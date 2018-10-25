@@ -3,15 +3,16 @@ var getComments = function(thisId) {
 		method: "GET",
 		url: "/articles/" + thisId
 	}).then(function(data) {
+		console.log(data);
 		$(".modal-title").text(data.title);
 		$("#saveComment").attr("data-id", data._id);
 		$("#current-title").empty();
 		$("#current-comment").empty();
 		// If there's a comment in the article
-		if (data.comment) {
-			console.log(data.comment);
-			$("#current-title").append(data.comment.title);
-			$("#current-comment").append(data.comment.text);
+		if (data.usercomment) {
+			console.log(data.usercomment);
+			$("#current-title").append(data.usercomment.title);
+			$("#current-comment").append(data.usercomment.text);
 			// Place the name of the user in the name id and the comment in the comment id
 			// Place the body of the comment in the body textarea
 		}
@@ -77,7 +78,7 @@ $(document).on("click", "#saveComment", function() {
 			// Log the response
 			// console.log(data);
 			// Empty the comments section
-			$(".modal-title").val("");
+			$(".modal-title").text("");
 			$("#comment-title").val("");
 			$("#comment-text").val("");
 			// $("#current-title").empty();
