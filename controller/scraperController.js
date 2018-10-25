@@ -8,13 +8,13 @@ var router = express.Router();
 
 var db = require("../models");
 
-router.get("/articles", function(req, res) {
+router.get("/", function(req, res) {
 	db.Article.find({})
 		.then(function(dbArticle) {
 			var hbsObject = {
-				article: dbArticle
+				articles: dbArticle
 			};
-			console.log(hbsObject);
+			// console.log(JSON.stringify(hbsObject));
 			res.render("index", hbsObject);
 		})
 		.catch(function(err) {

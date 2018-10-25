@@ -18,37 +18,37 @@ var getComments = function(thisId) {
 	});
 };
 
-$.getJSON("/articles", function(data) {
-	for (var i = 0; i < data.length; i++) {
-		//I really don't like this appending html cluster ff
-		$("#articles").append(
-			`<div class="row mt-4">
-                <div class="col-3">
-                    <img class="rounded thumbnail" 
-                    style="width:100%" 
-                    src='${data[i].image}' alt='article image'>
-                </div>
-                <div class="col-9">
-                    <a  href='${data[i].link}'  
-                        target='_blank'>
-                            <h3 class='mx-auto text-center'>
-                            ${data[i].title}
-                            </h3>
-                    </a>
-                    <p class="mb-0"> ${data[i].text}</p>
-                    <button 
-                        type="button" 
-                        class="btn btn-primary float-right" 
-                        data-id='${data[i]._id}'
-                        data-toggle="modal" 
-                        data-target=".bd-example-modal-lg"
-                        id="commentButton"
-                    >Comment</button>
-                </div>
-            </div>`
-		);
-	}
-});
+// $.getJSON("/", function(data) {
+// 	for (var i = 0; i < data.length; i++) {
+// 		//I really don't like this appending html cluster ff
+// 		$("#articles").append(
+// 			`<div class="row mt-4">
+//                 <div class="col-3">
+//                     <img class="rounded thumbnail"
+//                     style="width:100%"
+//                     src='${data[i].image}' alt='article image'>
+//                 </div>
+//                 <div class="col-9">
+//                     <a  href='${data[i].link}'
+//                         target='_blank'>
+//                             <h3 class='mx-auto text-center'>
+//                             ${data[i].title}
+//                             </h3>
+//                     </a>
+//                     <p class="mb-0"> ${data[i].text}</p>
+//                     <button
+//                         type="button"
+//                         class="btn btn-primary float-right"
+//                         data-id='${data[i]._id}'
+//                         data-toggle="modal"
+//                         data-target=".bd-example-modal-lg"
+//                         id="commentButton"
+//                     >Comment</button>
+//                 </div>
+//             </div>`
+// 		);
+// 	}
+// });
 
 $(document).on("click", "#commentButton", function() {
 	var thisId = $(this).attr("data-id");

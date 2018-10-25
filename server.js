@@ -1,15 +1,8 @@
-//Scraping Tools
-var cheerio = require("cheerio");
-var axios = require("axios");
-
 //middleware express
 var express = require("express");
 var logger = require("morgan");
 //database mongoose
 var mongoose = require("mongoose");
-
-//Require models
-var db = require("./models");
 var PORT = 3000;
 
 var app = express();
@@ -19,6 +12,14 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
+
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+var routes = require("./controller/scraperController.js");
+app.use(routes);
 
 //Connect to the mongo db
 mongoose.connect(
