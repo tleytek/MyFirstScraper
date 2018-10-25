@@ -28,7 +28,7 @@ $.getJSON("/articles", function(data) {
                     style="width:100%" 
                     src='${data[i].image}' alt='article image'>
                 </div>
-                <div class="col">
+                <div class="col-9">
                     <a  href='${data[i].link}'  
                         target='_blank'>
                             <h3 class='mx-auto text-center'>
