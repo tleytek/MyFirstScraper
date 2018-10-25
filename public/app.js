@@ -38,32 +38,16 @@ $(document).on("click", "#commentButton", function() {
 		url: "/articles/" + thisId
 	}).then(function(data) {
 		$(".modal-title").text(data.title);
-
-		$("#title").append(
-			"<label for='comment-title' class='col-form-label'>Comment Title</label>"
-		);
-		$("#title").append(
-			"<input type='text' class='form-control' id='comment-title'>"
-		);
-		$("#comment").append(
-			"<label for='comment-text' class='col-form-label'>Comment</label>"
-		);
-		$("#comment").append(
-			"<textarea class='form-control' id='comment-text'></textarea>"
-		);
 		$("#saveComment").attr("data-id", data._id);
-		console.log(data);
 		// If there's a comment in the article
-		if (data.userComment) {
-			console.log(data);
-			// Place the title of the comment in the title input
-			$("#comment-title").val(data.userComment.title);
+		if (data.comment) {
+			console.log(data.comment);
+
+			//prepend comments in the modal so the latest comment is seen first
+			$("#current-title").append(data.comment.title);
+			$("#current-comment").append(data.comment.title);
+			// Place the name of the user in the name id and the comment in the comment id
 			// Place the body of the comment in the body textarea
-			$("#comment-text").val(data.userComment.body);
-		} else {
-			$(".modal-title").empty();
-			$("#title").empty();
-			$("#comment").empty();
 		}
 	});
 });
@@ -81,7 +65,7 @@ $(document).on("click", "#saveComment", function() {
 			// Value taken from title input
 			title: $("#comment-title").val(),
 			// Value taken from comment textarea
-			body: $("#comment-text").val()
+			text: $("#comment-text").val()
 		}
 	})
 		// With that done
@@ -89,12 +73,8 @@ $(document).on("click", "#saveComment", function() {
 			// Log the response
 			// console.log(data);
 			// Empty the comments section
-			$(".modal-title").empty();
-			$("#title").empty();
-			$("#comment").empty();
+			$(".modal-title").val("");
+			$("#comment-title").val("");
+			$("#comment-text").val("");
 		});
-
-	// Also, remove the values entered in the input and textarea for  entry
-	$("#title").val("");
-	$("#comment").val("");
 });
