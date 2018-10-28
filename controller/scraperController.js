@@ -83,6 +83,12 @@ router.delete("/comment/:id", function(req, res) {
 
 //Scrapping data from a site
 router.get("/scrape", function(req, res) {
+	db.Article.deleteMany(function(err, removed) {
+		// console.log("collection removed");
+	});
+	db.Comment.deleteMany(function(err, removed) {
+		// console.log("collection removed");
+	});
 	// Making a request via axios for MassivelyOP's website. This is going to scrape all of the data from the website
 	axios.get("https://massivelyop.com").then(function(response) {
 		//Lets put the response through cheerio and save it to a variable
