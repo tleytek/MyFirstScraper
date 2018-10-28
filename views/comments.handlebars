@@ -15,41 +15,25 @@
                     <h3 class="mx-auto text-center">{{single.title}}</h3>
                 </a>
                 <p class="mb-0"> {{single.text}}</p>
-                <a href="/articles/{{_id}}" type="button" class="btn btn-primary float-right" id="commentButton">Comment</a>
+                <a href="/" type="button" class="btn btn-secondary float-right" id="goBackButton">Go
+                    Back</a>
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+            {{single.comment.title}}
+        </div>
+    </div>
+    <form class="py-3">
+        <div class="form-group">
+            <label for="comment-title">Title</label>
+            <input type="title" class="form-control" id="comment-title" placeholder="Enter a title">
+        </div>
+        <div class="form-group">
+            <label for="comment-text">Comment</label>
+            <input type="comment" class="form-control" id="comment-text" placeholder="Enter your comment">
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitComment" data-id="{{single._id}}">Submit</button>
+    </form>
 </div>
-
-{{!-- <div class="modal bd-example-modal-lg" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{single}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="commentSection">
-                    <h4 id="current-title"></h4>
-                    <p id="current-comment"></p>
-                </div>
-                <form>
-                    <div class="form-group" id="title">
-                        <label for='comment-title' class='col-form-label'>Comment Title</label>
-                        <input type='text' class='form-control' id='comment-title'>
-                    </div>
-                    <div class="form-group" id="comment">
-                        <label for='comment-text' class='col-form-label'>Comment</label>
-                        <textarea class='form-control' id='comment-text'></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveComment">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div> --}}
