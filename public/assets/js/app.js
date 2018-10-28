@@ -23,8 +23,7 @@ $(document).on("click", "#submitComment", function(event) {
 				// Value taken from title input
 				title: commentTitle,
 				// Value taken from comment textarea
-				text: commentText,
-				article: thisId
+				text: commentText
 			}
 		})
 			// With that done
