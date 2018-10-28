@@ -9,9 +9,9 @@ var app = express();
 
 app.use(logger("dev"));
 //Parse request body as JSON
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
 
 var exphbs = require("express-handlebars");
 
@@ -29,6 +29,6 @@ mongoose.connect(
 );
 
 //listen on port 3000
-app.listen(3000, function() {
+app.listen(PORT, function() {
 	console.log("App running on port " + PORT + "!");
 });
