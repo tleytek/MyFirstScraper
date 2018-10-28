@@ -1,4 +1,4 @@
-<div class="container bg-light">
+<div class="container bg-light pb-1">
     <div class="row" style="background-color:#323232">
 
         <h1 class="text-center text-white mx-auto mb-5">Scrapping Massively OP</h1>
@@ -20,11 +20,6 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
-            {{single.comment.title}}
-        </div>
-    </div>
     <form class="py-3">
         <div class="form-group">
             <label for="comment-title">Title</label>
@@ -36,4 +31,13 @@
         </div>
         <button type="submit" class="btn btn-primary" id="submitComment" data-id="{{single._id}}">Submit</button>
     </form>
+    {{#each single.comment}}
+    <div class="card my-1">
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{text}}</p>
+            <p class="card-text"><small class="text-muted">{{created_at}}</small></p>
+        </div>
+    </div>
+    {{/each}}
 </div>

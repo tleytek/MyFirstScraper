@@ -29,7 +29,7 @@ router.get("/articles/:id", function(req, res) {
 		// ..and populate all of the notes associated with it
 		.populate("comment")
 		.then(function(dbArticle) {
-			console.log(dbArticle);
+			// console.log(dbArticle);
 			var singleArticle = {
 				single: dbArticle
 			};
@@ -44,17 +44,17 @@ router.get("/articles/:id", function(req, res) {
 
 // Route for saving/updating an Article's associated Note
 router.post("/articles/:id", function(req, res) {
-	console.log(req.body);
+	// console.log(req.body);
 	// Create a new note and pass the req.body to the entry
 	db.Comment.create(req.body)
 		.then(function(dbComment) {
-			console.log(dbComment);
+			// console.log(dbComment);
 			// If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
 			// { new: true } tells the query that we want it to return the updated User -- it returns the original by default
 			// Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
 			return db.Article.findOneAndUpdate(
 				{ _id: req.params.id },
-				{ comment: dbComment._id }
+				{ $push: { comment: dbComment._id } }
 			);
 		})
 		.then(function(dbArticle) {
