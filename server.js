@@ -21,9 +21,11 @@ app.set("view engine", "handlebars");
 var routes = require("./controller/scraperController.js");
 app.use(routes);
 
+var MONGODB_URI =
+	process.env.MONGODB_URI || "mongodb://localhost/massivelyOPdb";
 //Connect to the mongo db
 mongoose.connect(
-	"mongodb://localhost/massivelyOPdb",
+	MONGODB_URI,
 	{ useNewUrlParser: true }
 );
 
