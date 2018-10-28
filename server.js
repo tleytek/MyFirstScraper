@@ -23,7 +23,10 @@ app.use(routes);
 
 var MONGODB_URI = process.env.MONGODB_URI;
 //Connect to the mongo db
-mongoose.connect(MONGODB_URI);
+mongoose.connect(
+	MONGODB_URI,
+	{ useNewUrlParser: true }
+);
 
 //listen on port 3000
 app.listen(3000, function() {
