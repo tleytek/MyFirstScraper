@@ -67,6 +67,20 @@ router.post("/articles/:id", function(req, res) {
 		});
 });
 
+//Proud of myself here with this one, removed the id from the comment array
+router.delete("/comment/:id", function(req, res) {
+	db.Article.findOneAndUpdate(
+		{ comment: req.params.id },
+		{ $pull: { comment: req.params.id } }
+	)
+		.then(function(dbArticle) {
+			res.json(dbArticle);
+		})
+		.catch(function(err) {
+			res.json(err);
+		});
+});
+
 //Scrapping data from a site
 router.get("/scrape", function(req, res) {
 	// Making a request via axios for MassivelyOP's website. This is going to scrape all of the data from the website

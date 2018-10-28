@@ -23,7 +23,8 @@ $(document).on("click", "#submitComment", function(event) {
 				// Value taken from title input
 				title: commentTitle,
 				// Value taken from comment textarea
-				text: commentText
+				text: commentText,
+				article: thisId
 			}
 		})
 			// With that done
@@ -44,4 +45,17 @@ $(document).on("click", "#submitComment", function(event) {
 	}
 
 	// Run a POST request to change the comment, using what's entered in the inputs
+});
+
+$(document).on("click", "#deleteComment", function(event) {
+	event.preventDefault();
+
+	var thisId = $(this).attr("data-id");
+
+	$.ajax({
+		method: "DELETE",
+		url: "/comment/" + thisId
+	}).then(function() {
+		location.reload();
+	});
 });

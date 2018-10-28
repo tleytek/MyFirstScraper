@@ -9,6 +9,10 @@ var CommentSchema = new Schema(
 		text: {
 			type: String,
 			required: true
+		},
+		article: {
+			type: String,
+			required: true
 		}
 	},
 	{
